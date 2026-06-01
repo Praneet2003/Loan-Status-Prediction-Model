@@ -1,33 +1,22 @@
 name: Loan Approval CI/CD Pipeline
-
 on:
   push:
     branches:
       - main
       - master
-
 jobs:
-
   build-and-test:
-
     runs-on: ubuntu-latest
-
     steps:
-
       - name: Checkout Repository
         uses: actions/checkout@v4
-
       - name: Set Up Docker Buildx
         uses: docker/setup-buildx-action@v3
-
       - name: Build Frontend Service
         run: docker build -t frontend-service ./Frontend-service
-
       - name: Build Prediction Service
         run: docker build -t prediction-service ./prediction-service
-
       - name: Build Logging Service
         run: docker build -t logging-service ./logging-service
-
       - name: Verify Docker Compose
         run: docker compose config
